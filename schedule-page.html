@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Your Private Tour | 2382 Lee Place</title>
+    <meta name="description" content="Schedule a private showing of this exceptional lakefront estate in Fairfield Plantation. Available for immediate viewing.">
+    
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #2b6cb0;
+            --light: #f7fafc;
+            --text: #2d3748;
+            --success: #48bb78;
+            --error: #f56565;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+        }
+        
+        /* Header (simplified) */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 5%;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+        
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        /* Form Section */
+        .form-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .form-header h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-header p {
+            color: #718096;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 2rem;
+            margin-top: 0.5rem;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .submit-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(43,108,176,0.3);
+        }
+        
+        .submit-button:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Info Section */
+        .info-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .info-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .contact-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-button {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--success);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .availability-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .availability-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .availability-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        /* Success/Error Messages */
+        .message {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .success-message {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+        }
+        
+        .error-message {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 1px solid #fc8181;
+        }
+        
+        /* Loading State */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .spinner {
+            border: 3px solid #e2e8f0;
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .schedule-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">2382 Lee Place</a>
+            <a href="index.html" class="back-link">← Back to Property</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="schedule-grid">
+            <!-- Form Section -->
+            <div class="form-section">
+                <div class="form-header">
+                    <h1>Schedule Your Private Tour</h1>
+                    <p>See this exceptional lakefront home in person</p>
+                </div>
+                
+                <div id="message-container"></div>
+                
+                <form id="scheduleForm">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(404) 555-1234">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="requestType">Request Type *</label>
+                        <select id="requestType" name="requestType" required>
+                            <option value="">Select one...</option>
+                            <option value="showing">Schedule In-Person Showing</option>
+                            <option value="virtual">Virtual Tour via Video Call</option>
+                            <option value="information">Request More Information</option>
+                            <option value="offer">Discuss Making an Offer</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="preferredDate">Preferred Date</label>
+                            <input type="date" id="preferredDate" name="preferredDate">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="preferredTime">Preferred Time</label>
+                            <select id="preferredTime" name="preferredTime">
+                                <option value="">Any time</option>
+                                <option value="9:00 AM">9:00 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                                <option value="1:00 PM">1:00 PM</option>
+                                <option value="2:00 PM">2:00 PM</option>
+                                <option value="3:00 PM">3:00 PM</option>
+                                <option value="4:00 PM">4:00 PM</option>
+                                <option value="5:00 PM">5:00 PM</option>
+                                <option value="6:00 PM">6:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Timeline for Purchase</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="immediate" name="timeline" value="immediate">
+                                <label for="immediate">Immediate (30 days)</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="soon" name="timeline" value="1-3months">
+                                <label for="soon">1-3 months</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="exploring" name="timeline" value="exploring">
+                                <label for="exploring">Just exploring</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Are you pre-approved for financing?</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="approved-yes" name="preApproved" value="yes">
+                                <label for="approved-yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="approved-no" name="preApproved" value="no">
+                                <label for="approved-no">Not yet</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="approved-cash" name="preApproved" value="cash">
+                                <label for="approved-cash">Cash buyer</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Additional Message (Optional)</label>
+                        <textarea id="message" name="message" placeholder="Any specific questions or requests?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Submit Request</button>
+                </form>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Sending your request...</p>
+                </div>
+            </div>
+            
+            <!-- Info Section -->
+            <div class="info-section">
+                <h2>Why Schedule a Showing?</h2>
+                <p>Photos can't capture the true beauty of this lakefront estate. Experience the gentle lake breeze, the quality of construction, and the resort-like amenities that make this property exceptional.</p>
+                
+                <div class="contact-card">
+                    <h3>Prefer to Call?</h3>
+                    <p>Speak directly with the owner</p>
+                    <a href="tel:4047504788" class="contact-button">📞 404.750.4788</a>
+                </div>
+                
+                <h3>What to Expect</h3>
+                <ul class="availability-list">
+                    <li>Private, personalized tours available 7 days a week</li>
+                    <li>Typical showing duration: 30-45 minutes</li>
+                    <li>See all three docks and boat lift</li>
+                    <li>Tour the community amenities</li>
+                    <li>Get answers to all your questions</li>
+                </ul>
+                
+                <h3>Current Availability</h3>
+                <p>The owner is flexible and can accommodate most showing requests with 24 hours notice. Weekend and evening appointments are available.</p>
+                
+                <div class="contact-card" style="background: #e6fffa;">
+                    <h3>Ready to Make an Offer?</h3>
+                    <p>If you're already familiar with the property and ready to discuss terms, select "Discuss Making an Offer" above or call directly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Google Apps Script endpoint (replace with your deployed URL)
+        const GAS_ENDPOINT = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+        
+        // Form handling
+        document.getElementById('scheduleForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitButton = form.querySelector('.submit-button');
+            const loading = document.getElementById('loading');
+            const messageContainer = document.getElementById('message-container');
+            
+            // Clear previous messages
+            messageContainer.innerHTML = '';
+            
+            // Disable form and show loading
+            submitButton.disabled = true;
+            form.style.display = 'none';
+            loading.style.display = 'block';
+            
+            // Collect form data
+            const formData = {
+                name: form.name.value,
+                email: form.email.value,
+                phone: form.phone.value,
+                requestType: form.requestType.value,
+                preferredDate: form.preferredDate.value,
+                preferredTime: form.preferredTime.value,
+                timeline: form.timeline.value,
+                preApproved: form.preApproved.value,
+                message: form.message.value,
+                source: 'schedule-page'
+            };
+            
+            try {
+                // Send to Google Apps Script
+                const response = await fetch(GAS_ENDPOINT, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                // Show success message (we assume success with no-cors)
+                loading.style.display = 'none';
+                messageContainer.innerHTML = `
+                    <div class="message success-message">
+                        <h3>Thank You!</h3>
+                        <p>We've received your request and will contact you within 24 hours to confirm your showing.</p>
+                        <p>If you need immediate assistance, please call <strong>404.750.4788</strong></p>
+                    </div>
+                `;
+                
+                // Reset form
+                form.reset();
+                form.style.display = 'block';
+                submitButton.disabled = false;
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+            } catch (error) {
+                // Show error message
+                loading.style.display = 'none';
+                form.style.display = 'block';
+                submitButton.disabled = false;
+                
+                messageContainer.innerHTML = `
+                    <div class="message error-message">
+                        <h3>Something went wrong</h3>
+                        <p>Please try again or call us directly at <strong>404.750.4788</strong></p>
+                    </div>
+                `;
+            }
+        });
+        
+        // Set minimum date to today
+        document.getElementById('preferredDate').min = new Date().toISOString().split('T')[0];
+        
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.length <= 3) {
+                    value = `(${value}`;
+                } else if (value.length <= 6) {
+                    value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+                } else {
+                    value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
+                }
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

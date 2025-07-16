@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lake Life Perfected | 2382 Lee Place - Fairfield Plantation</title>
+    <meta name="description" content="Exceptional 5,396 sq ft lakefront estate in gated Fairfield Plantation. Private dock, boat lift, and premium finishes. Offered at $1,189,000.">
+    
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Luxury Lakefront Living - 2382 Lee Place">
+    <meta property="og:description" content="5,396 sq ft estate with private dock in Fairfield Plantation">
+    <meta property="og:image" content="https://yourdomain.com/images/hero-lake-view.jpg">
+    <meta property="og:type" content="real_estate">
+    
+    <!-- Schema.org for real estate -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateListing",
+      "name": "Lakefront Estate at 2382 Lee Place",
+      "description": "Exceptional 5,396 sq ft lakefront home in gated Fairfield Plantation with private dock and boat lift",
+      "image": "https://yourdomain.com/images/hero-lake-view.jpg",
+      "url": "https://yourdomain.com",
+      "address": {
+        "@type": "PostalAddress",
+        "@id": "https://yourdomain.com/#address",
+        "streetAddress": "2382 Lee Place",
+        "addressLocality": "Villa Rica",
+        "addressRegion": "GA",
+        "postalCode": "30180"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "33.7132",
+        "longitude": "-84.9185"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "1189000",
+        "availability": "https://schema.org/InStock"
+      },
+      "numberOfRooms": 5,
+      "numberOfBathedBathrooms": 3,
+      "floorSize": {
+        "@type": "QuantitativeValue",
+        "value": 5396,
+        "unitCode": "SqFt"
+      },
+      "amenityFeature": [
+        {"@type": "LocationFeatureSpecification", "name": "Lakefront"},
+        {"@type": "LocationFeatureSpecification", "name": "Private Dock"},
+        {"@type": "LocationFeatureSpecification", "name": "Boat Lift"},
+        {"@type": "LocationFeatureSpecification", "name": "Gated Community"}
+      ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #2b6cb0;
+            --light: #f7fafc;
+            --text: #2d3748;
+            --success: #48bb78;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .cta-button {
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(43,108,176,0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            height: calc(100vh - 80px);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            overflow: hidden;
+        }
+        
+        /* Slideshow */
+        .slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: slideAnimation 15s infinite;
+        }
+        
+        .slide:nth-child(1) {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/slide1.jpg');
+            animation-delay: 0s;
+        }
+        
+        .slide:nth-child(2) {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/slide2.jpg');
+            animation-delay: 5s;
+        }
+        
+        .slide:nth-child(3) {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/slide3.jpg');
+            animation-delay: 10s;
+        }
+        
+        @keyframes slideAnimation {
+            0% { opacity: 0; }
+            8% { opacity: 1; }
+            33% { opacity: 1; }
+            41% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            max-width: 800px;
+        }
+        
+        .hero-content {
+            position: relative;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .hero-cta a {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .hero-cta a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(43,108,176,0.4);
+        }
+        
+        .hero-cta .secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+        
+        /* Key Stats */
+        .key-stats {
+            background: var(--light);
+            padding: 4rem 5%;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            color: #718096;
+            margin-top: 0.5rem;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature {
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* Lake Life Section */
+        .lake-life {
+            background: var(--light);
+            padding: 5rem 5%;
+        }
+        
+        .lake-life-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .lake-life-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .lake-life-text p {
+            margin-bottom: 1.5rem;
+            color: #4a5568;
+        }
+        
+        .lake-life-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .lake-life-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        
+        .contact-info {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.25rem;
+            margin: 0 1rem;
+        }
+        
+        /* Floating Schedule Button */
+        .floating-schedule {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(72,187,120,0.4);
+            transition: transform 0.2s;
+            z-index: 900;
+        }
+        
+        .floating-schedule:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .price {
+                font-size: 2rem;
+            }
+            
+            .lake-life-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">2382 Lee Place</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="lake-life.html">Lake Life</a></li>
+                <li><a href="schedule.html" class="cta-button">Schedule Viewing</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="slideshow">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Lake Life Perfected</h1>
+            <div class="price">$1,189,000</div>
+            <p>5,396 sq ft of luxury living on a premier lakefront lot in gated Fairfield Plantation</p>
+            <div class="hero-cta">
+                <a href="tel:4047504788">📞 Call Now: 404.750.4788</a>
+                <a href="schedule.html" class="secondary">Schedule Private Tour</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Stats -->
+    <section class="key-stats">
+        <div class="stats-grid">
+            <div class="stat">
+                <div class="stat-number">5,396</div>
+                <div class="stat-label">Square Feet</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Bedrooms</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Bathrooms</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Boat Docks</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">2000</div>
+                <div class="stat-label">Year Built</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Gated Security</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Exceptional Features</h2>
+            <p>Everything you need for the ultimate lake lifestyle</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">🚤</div>
+                <h3>Private Dock & Boat Lift</h3>
+                <p>Three docks including a covered boat lift. Launch your boat in minutes and enjoy endless days on the water.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🏊</div>
+                <h3>Resort Amenities</h3>
+                <p>Golf course, tennis courts, pools, marina restaurant, and private beach within your gated community.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🏡</div>
+                <h3>Premium Construction</h3>
+                <p>Brick exterior, quality finishes throughout, and meticulous maintenance make this home move-in ready.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lake Life Section -->
+    <section class="lake-life">
+        <div class="lake-life-content">
+            <div class="lake-life-text">
+                <h2>Your Private Lake Paradise</h2>
+                <p>Wake up to sparkling water views from your master suite. Enjoy morning coffee on your deck as the mist rises off the lake. This isn't just a home—it's a lifestyle.</p>
+                <p>With 10/10 rated lake frontage and three private docks, you'll have the best water access in Fairfield Plantation. Whether you love fishing, water sports, or peaceful sunset cruises, this property delivers.</p>
+                <a href="lake-life.html" class="cta-button">Explore Lake Living</a>
+            </div>
+            <div class="lake-life-image">
+                <img src="images/dock-sunset.jpg" alt="Private dock at sunset">
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Live Your Lake Dream?</h2>
+        <p>This property won't last long in today's market. Schedule your private tour today.</p>
+        <a href="schedule.html" class="cta-button" style="background: white; color: var(--primary);">Schedule Viewing</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="contact-info">
+            <a href="tel:4047504788">📞 404.750.4788</a>
+            <a href="mailto:james@branton.law">✉️ Email James</a>
+        </div>
+        <p>2382 Lee Place, Villa Rica, GA 30180 | Gated Fairfield Plantation</p>
+        <p>&copy; 2025 Property of Jacqueline Branton</p>
+    </footer>
+
+    <!-- Floating Schedule Button -->
+    <a href="schedule.html" class="floating-schedule">Schedule Tour →</a>
+
+    <!-- Minimal JS for smooth scrolling -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

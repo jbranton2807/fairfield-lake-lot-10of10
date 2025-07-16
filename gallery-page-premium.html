@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery & Virtual Tours | 2382 Lee Place</title>
+    <meta name="description" content="View professional photos, drone footage, and 3D virtual tour of this lakefront estate in Fairfield Plantation.">
+    
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #2b6cb0;
+            --light: #f7fafc;
+            --text: #2d3748;
+            --success: #48bb78;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Gallery Navigation Tabs */
+        .gallery-nav {
+            background: white;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 70px;
+            z-index: 99;
+        }
+        
+        .gallery-tabs {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+        }
+        
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #718096;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+        
+        .tab-button:hover {
+            color: var(--primary);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 3rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        /* Photo Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Drone Section */
+        .drone-hero {
+            position: relative;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .drone-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .drone-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .play-button::after {
+            content: '▶';
+            font-size: 2rem;
+            color: var(--primary);
+            margin-left: 5px;
+        }
+        
+        /* 3D Tour Section */
+        .tour-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .tour-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        
+        .tour-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .tour-placeholder {
+            background: var(--light);
+            padding: 4rem 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        
+        .tour-placeholder h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .tour-placeholder .cta-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 2rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        
+        .tour-placeholder .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            cursor: pointer;
+        }
+        
+        .lightbox img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+        }
+        
+        .video-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 1000px;
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: auto;
+        }
+        
+        /* Feature Tags */
+        .feature-tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .tag {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+        
+        .tag.premium {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-tabs {
+                gap: 1rem;
+            }
+            
+            .tab-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">2382 Lee Place</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="schedule.html">Schedule Tour</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Gallery Navigation -->
+    <nav class="gallery-nav">
+        <div class="gallery-tabs">
+            <button class="tab-button active" data-tab="photos">📸 Photos</button>
+            <button class="tab-button" data-tab="drone">🚁 Drone Views</button>
+            <button class="tab-button" data-tab="tour">🏠 3D Tour</button>
+            <button class="tab-button" data-tab="floorplan">📐 Floor Plans</button>
+        </div>
+    </nav>
+
+    <!-- Photos Section -->
+    <section class="content-section active" id="photos">
+        <h1>Professional Photography Gallery</h1>
+        <p>Click any image to view full size</p>
+        
+        <div class="feature-tags">
+            <span class="tag">Professional Photos</span>
+            <span class="tag">HDR Photography</span>
+            <span class="tag">Twilight Shots</span>
+            <span class="tag premium">By Intuitive Perception Media</span>
+        </div>
+        
+        <div class="gallery-grid">
+            <!-- Exterior Photos -->
+            <div class="gallery-item" onclick="openLightbox('images/gallery/full/front-exterior.jpg')">
+                <img src="images/gallery/thumbs/front-exterior-thumb.jpg" alt="Front exterior view">
+                <div class="gallery-caption">Front Exterior - Elegant Brick Facade</div>
+            </div>
+            
+            <div class="gallery-item" onclick="openLightbox('images/gallery/full/lake-view.jpg')">
+                <img src="images/gallery/thumbs/lake-view-thumb.jpg" alt="Stunning lake view">
+                <div class="gallery-caption">Panoramic Lake View</div>
+            </div>
+            
+            <div class="gallery-item" onclick="openLightbox('images/gallery/full/dock-sunset.jpg')">
+                <img src="images/gallery/thumbs/dock-sunset-thumb.jpg" alt="Private dock at sunset">
+                <div class="gallery-caption">Private Dock at Golden Hour</div>
+            </div>
+            
+            <!-- Interior Photos -->
+            <div class="gallery-item" onclick="openLightbox('images/gallery/full/living-room.jpg')">
+                <img src="images/gallery/thumbs/living-room-thumb.jpg" alt="Spacious living room">
+                <div class="gallery-caption">Grand Living Room</div>
+            </div>
+            
+            <div class="gallery-item" onclick="openLightbox('images/gallery/full/kitchen.jpg')">
+                <img src="images/gallery/thumbs/kitchen-thumb.jpg" alt="Gourmet kitchen">
+                <div class="gallery-caption">Chef's Kitchen</div>
+            </div>
+            
+            <div class="gallery-item" onclick="openLightbox('images/gallery/full/master-suite.jpg')">
+                <img src="images/gallery/thumbs/master-suite-thumb.jpg" alt="Master bedroom">
+                <div class="gallery-caption">Master Suite with Lake Views</div>
+            </div>
+            
+            <!-- More photos will be added dynamically -->
+        </div>
+    </section>
+
+    <!-- Drone Section -->
+    <section class="content-section" id="drone">
+        <h1>Aerial Views & Drone Footage</h1>
+        <p>Experience the property and community from above</p>
+        
+        <div class="feature-tags">
+            <span class="tag">4K Drone Video</span>
+            <span class="tag">Aerial Photography</span>
+            <span class="tag">Community Overview</span>
+            <span class="tag premium">FAA Licensed Pilot</span>
+        </div>
+        
+        <div class="drone-hero" onclick="playDroneVideo()">
+            <img src="images/drone/aerial-hero.jpg" alt="Aerial view of property">
+            <div class="drone-overlay">
+                <div class="play-button"></div>
+            </div>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox('images/drone/aerial-property.jpg')">
+                <img src="images/drone/aerial-property.jpg" alt="Property from above">
+                <div class="gallery-caption">Complete Property Overview</div>
+            </div>
+            
+            <div class="gallery-item" onclick="openLightbox('images/drone/aerial-lakefront.jpg')">
+                <img src="images/drone/aerial-lakefront.jpg" alt="Lakefront aerial">
+                <div class="gallery-caption">Premium Lakefront Location</div>
+            </div>
+            
+            <div class="gallery-item" onclick="openLightbox('images/drone/aerial-community.jpg')">
+                <img src="images/drone/aerial-community.jpg" alt="Fairfield Plantation aerial">
+                <div class="gallery-caption">Gated Community Overview</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Tour Section -->
+    <section class="content-section" id="tour">
+        <div class="tour-container">
+            <h1>Interactive 3D Virtual Tour</h1>
+            <p>Walk through every room at your own pace</p>
+            
+            <div class="feature-tags">
+                <span class="tag">Matterport 3D</span>
+                <span class="tag">VR Compatible</span>
+                <span class="tag">Dollhouse View</span>
+                <span class="tag premium">Professional Scan</span>
+            </div>
+            
+            <!-- 3D Tour will be embedded here -->
+            <div class="tour-placeholder">
+                <h3>🏠 3D Virtual Tour Coming Soon</h3>
+                <p>Our professional 3D scanning team is preparing an immersive walkthrough experience.</p>
+                <p>In the meantime, explore our photo gallery or schedule an in-person tour.</p>
+                <a href="schedule.html" class="cta-button">Schedule In-Person Tour</a>
+            </div>
+            
+            <!-- When tour is ready, replace above with:
+            <div class="tour-embed">
+                <iframe src="MATTERPORT_OR_ZILLOW_3D_URL" allowfullscreen allow="vr; xr;"></iframe>
+            </div>
+            -->
+        </div>
+    </section>
+
+    <!-- Floor Plans Section -->
+    <section class="content-section" id="floorplan">
+        <h1>Detailed Floor Plans</h1>
+        <p>Explore the layout of all 5,396 square feet</p>
+        
+        <div class="feature-tags">
+            <span class="tag">Main Level: 3,888 sq ft</span>
+            <span class="tag">Finished Basement: 1,508 sq ft</span>
+            <span class="tag">5 Bedrooms</span>
+            <span class="tag">3 Bathrooms</span>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox('images/floorplans/main-level.jpg')">
+                <img src="images/floorplans/main-level-thumb.jpg" alt="Main level floor plan">
+                <div class="gallery-caption">Main Level Floor Plan</div>
+            </div>
+            
+            <div class="gallery-item" onclick="openLightbox('images/floorplans/basement.jpg')">
+                <img src="images/floorplans/basement-thumb.jpg" alt="Basement floor plan">
+                <div class="gallery-caption">Finished Basement Layout</div>
+            </div>
+            
+            <div class="gallery-item" onclick="openLightbox('images/floorplans/site-plan.jpg')">
+                <img src="images/floorplans/site-plan-thumb.jpg" alt="Property site plan">
+                <div class="gallery-caption">Property Site Plan</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal" onclick="closeVideo()">
+        <div class="video-container">
+            <video id="droneVideo" controls>
+                <source src="videos/drone-tour.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        // Tab navigation
+        const tabs = document.querySelectorAll('.tab-button');
+        const sections = document.querySelectorAll('.content-section');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetId = tab.getAttribute('data-tab');
+                
+                // Update active states
+                tabs.forEach(t => t.classList.remove('active'));
+                sections.forEach(s => s.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+        
+        // Lightbox functionality
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Video functionality
+        function playDroneVideo() {
+            document.getElementById('videoModal').style.display = 'block';
+            document.getElementById('droneVideo').play();
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeVideo() {
+            const video = document.getElementById('droneVideo');
+            video.pause();
+            video.currentTime = 0;
+            document.getElementById('videoModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                closeVideo();
+            }
+        });
+        
+        // Dynamic image loading (for when images are ready)
+        async function loadGalleryImages() {
+            try {
+                const response = await fetch('images/manifest.json');
+                const manifest = await response.json();
+                
+                // Populate gallery with actual images
+                // This will be implemented when images are ready
+            } catch (error) {
+                console.log('Image manifest not ready yet');
+            }
+        }
+        
+        // Load images when ready
+        window.addEventListener('load', loadGalleryImages);
+    </script>
+</body>
+</html>
